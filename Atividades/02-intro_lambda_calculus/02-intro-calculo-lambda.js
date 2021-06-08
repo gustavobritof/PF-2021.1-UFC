@@ -1,3 +1,7 @@
+
+//#2 Assista ao vídeo sobre introdução ao cálculo lambda, faça o código junto com o vídeo.
+
+
 let r;
 //Nao entendi direito o que é o let
 
