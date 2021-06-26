@@ -11,6 +11,4 @@ comparelist = zip ['a'..'z'] ['A'..'Z']
 
 toUpper c = [ y | (x,y)  <- comparelist,x==c] 
 
-upper s 
-    |[x | x <- s , elem x ['a'..'z']] = toUpper s
-    |otherwise = upper s 
+ Todaminuscula text= map toUpper text
