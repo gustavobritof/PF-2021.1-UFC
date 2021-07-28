@@ -37,17 +37,20 @@ pegarCodigo indice armarios =
 aluguel :: Int -> Armarios -> Either String Armarios
 aluguel indice armarios = 
      case pegarCodigo indice armarios of
-            Right codigo -> Right (Map.insert indice (Alugado, codigo) armarios)
             Left e -> Left e
+            Right codigo -> Right (Map.insert indice (Alugado, codigo) armarios)
 
 -- para devolver um armário é necessário que ele exista, que esteja alugado e que o código esteja correto
 -- utilize a função pegar armário para verificar a existência.
 -- Se o armário não estiver alugado ou se o código estiver incorreto avise utilizando o Left.
 devolucao :: Int -> Codigo -> Armarios -> Either String Armarios
 devolucao indice codigo armarios =  
-    case pegarArmario indice armarios of
-        Right codigo -> Right (Map.insert indice (Livre, codigo) armarios)
-        Left e -> Left e
+   case pegarArmario indice armarios of
+    Left e -> Left $ e
+    Right (estado, codigoaux) -> if codigo == codigoaux
+                                        then if estado /= Livre then Right (Map.insert indice (Livre, codigoaux) armarios) else Left "Armario nao esta alugado"
+                                        else Left "Codigo incorreto" 
+
 
 
 lockers :: Armarios
